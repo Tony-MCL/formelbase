@@ -1,5 +1,4 @@
 /* ==== [BLOCK: Imports] BEGIN ==== */
-import "katex/dist/katex.min.css"
 import { VariableTable } from "./VariableTable"
 import type { Formula } from "@/core/types"
 import { solveFor } from "@/core/useCalculator"
