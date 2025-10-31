@@ -36,3 +36,17 @@ html, body, #root { height: 100%; }
   @apply border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20;
 }
 /* ==== [BLOCK: Chips] END ==== */
+/* ==== [BLOCK: NavTree Styles] BEGIN ==== */
+.nav-details > summary {
+  list-style: none;
+}
+.nav-summary {
+  @apply cursor-pointer select-none px-2 py-1 rounded font-medium hover:bg-slate-50 dark:hover:bg-slate-800;
+}
+.nav-subsummary {
+  @apply cursor-pointer select-none px-2 py-1 rounded text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800;
+}
+.nav-item {
+  @apply w-full text-left text-sm px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-800;
+}
+/* ==== [BLOCK: NavTree Styles] END ==== */
