@@ -44,11 +44,13 @@ export function NavTree({
             {secs.map(([sec, fs]) => (
               <details key={sec} className="nav-details">
                 <summary className="nav-subsummary">{sec}</summary>
-                <ul className="mt-1 mb-2 space-y-1">
+
+                {/* Ekstra innrykk for selve formlene */}
+                <ul className="mt-1 mb-2 space-y-1 pl-5 nav-leaf-wrap">
                   {fs.map(f => (
                     <li key={f.id}>
                       <button
-                        className="nav-item"
+                        className="nav-item nav-leaf"
                         onClick={() => onSelect(f)}
                         title={f.formula}
                       >
