@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==== [BLOCK: Base] BEGIN ==== */
+html, body, #root { height: 100%; }
+:root {
+  --panel: theme(colors.white);
+  --panel-dark: theme(colors.slate.800);
+}
+.katex { font-size: 1.08rem; }
+/* ==== [BLOCK: Base] END ==== */
+
+/* ==== [BLOCK: Components] BEGIN ==== */
+.app-shell {
+  @apply min-h-screen text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900;
+}
+.panel {
+  @apply bg-white/90 dark:bg-slate-800/80 backdrop-blur border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm;
+}
+.btn {
+  @apply inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100/70 dark:hover:bg-slate-700/60;
+}
+.input {
+  @apply w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 outline-none;
+}
+.badge {
+  @apply inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600;
+}
+/* ==== [BLOCK: Components] END ==== */
