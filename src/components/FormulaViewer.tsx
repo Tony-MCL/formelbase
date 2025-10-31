@@ -1,10 +1,10 @@
 /* ==== [BLOCK: Imports] BEGIN ==== */
 import "katex/dist/katex.min.css"
-import { BlockMath } from "react-katex"
 import { VariableTable } from "./VariableTable"
 import type { Formula } from "@/core/types"
 import { solveFor } from "@/core/useCalculator"
 import { useEffect, useMemo, useState } from "react"
+import { SafeMath } from "./SafeMath"
 /* ==== [BLOCK: Imports] END ==== */
 
 type KV = Record<string, number>
@@ -66,11 +66,11 @@ export function FormulaViewer({
       </div>
       {/* ==== [BLOCK: Header] END ==== */}
 
-      {/* ==== [BLOCK: Formula] BEGIN ==== */}
+      /* ==== [BLOCK: Formula] BEGIN ==== */
       <div className="px-2">
-        <BlockMath math={formula.formula.replaceAll("*", "\\cdot ").replace("√3", "\\sqrt{3}")} />
+        <SafeMath math={formula.formula} />
       </div>
-      {/* ==== [BLOCK: Formula] END ==== */}
+      /* ==== [BLOCK: Formula] END ==== */
 
       {/* ==== [BLOCK: Variables] BEGIN ==== */}
       <VariableTable f={formula} />
