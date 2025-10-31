@@ -1,33 +1,125 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* ==== [BLOCK: Base] BEGIN ==== */
-html, body, #root { height: 100%; }
+/* ==== [BLOCK: Color Theme Variables] BEGIN ==== */
 :root {
-  --panel: theme(colors.white);
-  --panel-dark: theme(colors.slate.800);
-}
-.katex { font-size: 1.08rem; }
-/* ==== [BLOCK: Base] END ==== */
+  /* === Morning Coffee Labs farger (lys modus) === */
+  --coffee-light: #d7bfa3;  /* lys, varm brun – hovedfarge i light mode */
+  --coffee-medium: #b08968; /* sekundær bakgrunn eller hover */
+  --coffee-dark: #7f5539;   /* kontrast/tekst på lys bakgrunn */
+  --coffee-accent: #a67b5b; /* knapp/detalj */
+  --coffee-bg: #fdfbf8;     /* hovedbakgrunn i light mode */
 
-/* ==== [BLOCK: Components] BEGIN ==== */
+  /* === Standard grå og UI-farger === */
+  --grid: #e5e7eb;
+  --line: #d1d5db;
+  --line-strong: #9ca3af;
+  --weekend: #f3f4f6;
+  --bar: #60a5fa;
+  --txt: #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* === Morning Coffee Labs farger (mørk modus) === */
+    --coffee-light: #d7bfa3;
+    --coffee-medium: #a67b5b;
+    --coffee-dark: #3b2f2f;   /* mørk brun, nesten svart */
+    --coffee-accent: #c5a57d;
+    --coffee-bg: #1a1410;     /* bakgrunn mørk modus */
+
+    --grid: #3a3a3a;
+    --line: #4b4b4b;
+    --line-strong: #6b6b6b;
+    --weekend: #2a2a2a;
+    --bar: #3b82f6;
+    --txt: #f5f5f5;
+  }
+}
+/* ==== [BLOCK: Color Theme Variables] END ==== */
+
+
+/* ==== [BLOCK: Global Theme Application] BEGIN ==== */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--coffee-bg);
+  color: var(--txt);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .app-shell {
-  @apply min-h-screen text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900;
+  min-height: 100%;
 }
+
+/* Paneler */
 .panel {
-  @apply bg-white/90 dark:bg-slate-800/80 backdrop-blur border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm;
+  @apply rounded-xl border;
+  border-color: var(--line);
+  background-color: color-mix(in srgb, var(--coffee-bg) 95%, var(--coffee-light) 5%);
 }
+
+.dark .panel {
+  background-color: color-mix(in srgb, var(--coffee-bg) 85%, var(--coffee-dark) 15%);
+  border-color: var(--line);
+}
+
+/* Knapper */
 .btn {
-  @apply inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100/70 dark:hover:bg-slate-700/60;
+  @apply inline-flex items-center gap-1 px-3 py-1.5 rounded-md transition font-medium text-sm;
+  background-color: var(--coffee-accent);
+  color: #ffffff;
+  border: 1px solid transparent;
 }
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+.dark .btn {
+  background-color: var(--coffee-medium);
+}
+
+.dark .btn:hover {
+  filter: brightness(1.15);
+}
+
+/* Inputs */
 .input {
-  @apply w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 outline-none;
+  @apply rounded-md px-2 py-1 w-full border;
+  border-color: var(--line);
+  background-color: color-mix(in srgb, var(--coffee-bg) 90%, var(--coffee-light) 10%);
+  color: var(--txt);
 }
-.badge {
-  @apply inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600;
+
+.input:focus {
+  outline: 2px solid var(--coffee-medium);
+  outline-offset: 1px;
 }
-/* ==== [BLOCK: Components] END ==== */
+
+.dark .input {
+  background-color: color-mix(in srgb, var(--coffee-bg) 80%, var(--coffee-dark) 20%);
+  color: var(--txt);
+}
+
+/* Topbar */
+header {
+  backdrop-filter: blur(6px);
+}
+
+/* Nav-tekstfarger */
+summary.nav-summary,
+summary.nav-subsummary {
+  color: var(--coffee-dark);
+}
+
+.nav-item:hover {
+  background-color: color-mix(in srgb, var(--coffee-light) 20%, var(--coffee-bg) 80%);
+}
+/* ==== [BLOCK: Global Theme Application] END ==== */
+
+
 /* ==== [BLOCK: Chips] BEGIN ==== */
 .chip {
   @apply text-xs px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 transition;
@@ -36,9 +128,12 @@ html, body, #root { height: 100%; }
   @apply border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20;
 }
 /* ==== [BLOCK: Chips] END ==== */
+
+
 /* ==== [BLOCK: NavTree Styles] BEGIN ==== */
 .nav-details > summary {
   list-style: none;
+  cursor: pointer;
 }
 .nav-summary {
   @apply cursor-pointer select-none px-2 py-1 rounded font-medium hover:bg-slate-50 dark:hover:bg-slate-800;
@@ -50,9 +145,11 @@ html, body, #root { height: 100%; }
   @apply w-full text-left text-sm px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-800;
 }
 /* ==== [BLOCK: NavTree Styles] END ==== */
+
+
 /* ==== [BLOCK: NavTree Indent Styles] BEGIN ==== */
 .nav-leaf-wrap {
-  /* subtil venstrekant for å skille formler fra grupper (valgfritt men pent) */
+  /* subtil venstrekant for å skille formler fra grupper */
   @apply border-l border-slate-200 dark:border-slate-800;
 }
 
