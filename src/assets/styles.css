@@ -28,3 +28,11 @@ html, body, #root { height: 100%; }
   @apply inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600;
 }
 /* ==== [BLOCK: Components] END ==== */
+/* ==== [BLOCK: Chips] BEGIN ==== */
+.chip {
+  @apply text-xs px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 transition;
+}
+.chip-active {
+  @apply border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20;
+}
+/* ==== [BLOCK: Chips] END ==== */
