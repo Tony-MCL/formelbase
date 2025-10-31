@@ -1,0 +1,75 @@
+[
+  {
+    "id": "ohms-law",
+    "title": "Ohms lov",
+    "category": "Elkraft",
+    "section": "Grunnleggende",
+    "formula": "U = I * R",
+    "variables": {
+      "U": { "symbol": "U", "name": "Spenning", "unit": "V", "description": "Elektrisk potensialforskjell" },
+      "I": { "symbol": "I", "name": "Strøm", "unit": "A", "description": "Elektrisk strøm" },
+      "R": { "symbol": "R", "name": "Motstand", "unit": "Ω", "description": "Elektrisk motstand" }
+    },
+    "description": "Grunnforholdet mellom spenning, strøm og motstand.",
+    "tags": ["ohm", "grunnleggende"]
+  },
+  {
+    "id": "power-1ph-ac",
+    "title": "Aktiv effekt (1-fase AC)",
+    "category": "Elkraft",
+    "section": "Effekt",
+    "formula": "P = U * I * cosφ",
+    "variables": {
+      "P": { "symbol": "P", "name": "Aktiv effekt", "unit": "W" },
+      "U": { "symbol": "U", "name": "Spenning", "unit": "V" },
+      "I": { "symbol": "I", "name": "Strøm", "unit": "A" },
+      "cosφ": { "symbol": "cosφ", "name": "Effektfaktor", "unit": "-" }
+    },
+    "description": "Reell effekt i 1-fase AC-krets.",
+    "tags": ["effekt", "ac"]
+  },
+  {
+    "id": "power-3ph-ac",
+    "title": "Aktiv effekt (3-fase AC, systemeffekt)",
+    "category": "Elkraft",
+    "section": "Effekt",
+    "formula": "P = √3 * U * I * cosφ",
+    "variables": {
+      "P": { "symbol": "P", "name": "Aktiv effekt", "unit": "W" },
+      "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+      "I": { "symbol": "I", "name": "Linjestrom", "unit": "A" },
+      "cosφ": { "symbol": "cosφ", "name": "Effektfaktor", "unit": "-" }
+    },
+    "description": "Reell effekt i 3-fase system (linje-til-linje-spenning).",
+    "tags": ["effekt", "3-fase"]
+  },
+  {
+    "id": "resistance-wire",
+    "title": "Motstand i leder",
+    "category": "Elkraft",
+    "section": "Grunnleggende",
+    "formula": "R = ρ * L / A",
+    "variables": {
+      "R": { "symbol": "R", "name": "Motstand", "unit": "Ω" },
+      "ρ": { "symbol": "ρ", "name": "Resistivitet", "unit": "Ω·m" },
+      "L": { "symbol": "L", "name": "Lengde", "unit": "m" },
+      "A": { "symbol": "A", "name": "Tverrsnitt", "unit": "m²" }
+    },
+    "description": "Geometrisk og materialspecifikk motstand.",
+    "tags": ["leder", "resistivitet"]
+  },
+  {
+    "id": "power-loss-wire",
+    "title": "Effekttap i leder",
+    "category": "Elkraft",
+    "section": "Effekt",
+    "formula": "P_loss = I^2 * R",
+    "variables": {
+      "P_loss": { "symbol": "P_loss", "name": "Effekttap", "unit": "W" },
+      "I": { "symbol": "I", "name": "Strøm", "unit": "A" },
+      "R": { "symbol": "R", "name": "Motstand", "unit": "Ω" }
+    },
+    "description": "Varmeutvikling i leder pga. strøm.",
+    "tags": ["tap", "varme"]
+  }
+]
