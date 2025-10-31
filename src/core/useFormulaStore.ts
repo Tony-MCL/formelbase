@@ -70,7 +70,13 @@ export function useFormulaStore() {
         )
       const inCat = !filter.category || f.category === filter.category
       const inSec = !filter.section || f.section === filter.section
-      return inQ && inCat && inSec
+
+      // Tag-filter: alle valgte tags må finnes i f.tags (AND), eller velg OR?
+      // Vi velger OR (mer brukervennlig i søk).
+      const sel = filter.tags ?? []
+      const inTags = sel.length === 0 || (f.tags ?? []).some(t => sel.includes(t))
+
+      return inQ && inCat && inSec && inTags
     })
   }
 
@@ -82,9 +88,13 @@ export function useFormulaStore() {
     () => Array.from(new Set(all.map(f => f.section))).sort(),
     [all]
   )
+  const allTags = useMemo(
+    () => Array.from(new Set(all.flatMap(f => f.tags ?? []))).sort((a,b) => a.localeCompare(b)),
+    [all]
+  )
 
   return {
-    all, categories, sections,
+    all, categories, sections, allTags,
     search,
     toggleFavorite,
     saveNote,
@@ -96,4 +106,3 @@ export function useFormulaStore() {
 /* ==== [BLOCK: Default Export] BEGIN ==== */
 export default useFormulaStore
 /* ==== [BLOCK: Default Export] END ==== */
-
