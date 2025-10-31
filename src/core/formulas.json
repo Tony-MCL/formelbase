@@ -227,6 +227,225 @@
   },
   "description": "Spenningsfall i leder som følge av resistans.",
   "tags": ["leder", "spenningsfall"]
+},
+{
+  "id": "active-power-1ph",
+  "title": "Aktiv effekt (1-fase)",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "P = U * I * cosφ",
+  "variables": {
+    "P": { "symbol": "P", "name": "Aktiv effekt", "unit": "W" },
+    "U": { "symbol": "U", "name": "Spenning", "unit": "V" },
+    "I": { "symbol": "I", "name": "Strøm", "unit": "A" },
+    "cosφ": { "symbol": "cosφ", "name": "Effektfaktor", "unit": "-" }
+  },
+  "description": "Virkeeffekt i 1-fase.",
+  "tags": ["effekt", "1-fase", "aktiv"]
+},
+{
+  "id": "active-power-3ph",
+  "title": "Aktiv effekt (3-fase)",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "P = √3 * U * I * cosφ",
+  "variables": {
+    "P": { "symbol": "P", "name": "Aktiv effekt", "unit": "W" },
+    "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+    "I": { "symbol": "I", "name": "Linjestrøm", "unit": "A" },
+    "cosφ": { "symbol": "cosφ", "name": "Effektfaktor", "unit": "-" }
+  },
+  "description": "Virkeeffekt i 3-fase system.",
+  "tags": ["effekt", "3-fase", "aktiv"]
+},
+{
+  "id": "reactive-power-3ph",
+  "title": "Reaktiv effekt (3-fase)",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "Q = √3 * U * I * sinφ",
+  "variables": {
+    "Q": { "symbol": "Q", "name": "Reaktiv effekt", "unit": "var" },
+    "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+    "I": { "symbol": "I", "name": "Linjestrøm", "unit": "A" },
+    "sinφ": { "symbol": "sinφ", "name": "Sinus til fasevinkel", "unit": "-" }
+  },
+  "description": "Reaktiv effekt i 3-fase.",
+  "tags": ["effekt", "3-fase", "reaktiv"]
+},
+{
+  "id": "impedance-from-rx",
+  "title": "Impedans fra R og X",
+  "category": "Elkraft",
+  "section": "Kortslutning/Impedans",
+  "formula": "Z = √(R^2 + X^2)",
+  "variables": {
+    "Z": { "symbol": "Z", "name": "Impedans", "unit": "Ω" },
+    "R": { "symbol": "R", "name": "Resistans", "unit": "Ω" },
+    "X": { "symbol": "X", "name": "Reaktans", "unit": "Ω" }
+  },
+  "description": "Resultant impedans.",
+  "tags": ["impedans", "kortslutning", "R", "X"]
+},
+{
+  "id": "ik-3ph",
+  "title": "Kortslutningsstrøm 3-fase (forenklet)",
+  "category": "Elkraft",
+  "section": "Kortslutning/Impedans",
+  "formula": "I_k = U / (√3 * Z)",
+  "variables": {
+    "I_k": { "symbol": "I_k", "name": "Kortslutningsstrøm (3-fase)", "unit": "A" },
+    "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+    "Z": { "symbol": "Z", "name": "Impedans sett fra punktet", "unit": "Ω" }
+  },
+  "description": "Forenklet beregning av 3-fase kortslutningsstrøm.",
+  "tags": ["kortslutning", "3-fase", "impedans"]
+},
+{
+  "id": "vdrop-3ph",
+  "title": "Spenningsfall 3-fase (tilnærmet)",
+  "category": "Elkraft",
+  "section": "Ledninger",
+  "formula": "ΔU = √3 * I * (R * cosφ + X * sinφ)",
+  "variables": {
+    "ΔU": { "symbol": "ΔU", "name": "Spenningsfall", "unit": "V" },
+    "I": { "symbol": "I", "name": "Strøm", "unit": "A" },
+    "R": { "symbol": "R", "name": "Resistans leder", "unit": "Ω" },
+    "X": { "symbol": "X", "name": "Reaktans leder", "unit": "Ω" },
+    "cosφ": { "symbol": "cosφ", "name": "Effektfaktor", "unit": "-" },
+    "sinφ": { "symbol": "sinφ", "name": "Sinus til fasevinkel", "unit": "-" }
+  },
+  "description": "Tilnærmet spenningsfall i 3-fase kabel/linje.",
+  "tags": ["spenningsfall", "3-fase", "leder"]
+},
+{
+  "id": "vdrop-percent",
+  "title": "Spenningsfall i prosent",
+  "category": "Elkraft",
+  "section": "Ledninger",
+  "formula": "ΔU_pct = (ΔU / U) * 100",
+  "variables": {
+    "ΔU_pct": { "symbol": "ΔU%", "name": "Spenningsfall i prosent", "unit": "%" },
+    "ΔU": { "symbol": "ΔU", "name": "Spenningsfall", "unit": "V" },
+    "U": { "symbol": "U", "name": "Nominell spenning", "unit": "V" }
+  },
+  "description": "Prosentvis spenningsfall.",
+  "tags": ["spenningsfall", "prosent"]
+},
+{
+  "id": "ploss-conductor",
+  "title": "Effekttap i leder",
+  "category": "Elkraft",
+  "section": "Ledninger",
+  "formula": "P_loss = I^2 * R",
+  "variables": {
+    "P_loss": { "symbol": "P_loss", "name": "Effekttap", "unit": "W" },
+    "I": { "symbol": "I", "name": "Strøm", "unit": "A" },
+    "R": { "symbol": "R", "name": "Motstand", "unit": "Ω" }
+  },
+  "description": "Ohmsk effekttap i leder.",
+  "tags": ["tap", "leder", "I^2R"]
+},
+{
+  "id": "resistance-temp",
+  "title": "Motstand som funksjon av temperatur",
+  "category": "Elkraft",
+  "section": "Ledninger",
+  "formula": "R_T = R_20 * (1 + α * (T - 20))",
+  "variables": {
+    "R_T": { "symbol": "R_T", "name": "Motstand ved T", "unit": "Ω" },
+    "R_20": { "symbol": "R_20", "name": "Motstand ved 20°C", "unit": "Ω" },
+    "α": { "symbol": "α", "name": "Tempkoeffisient", "unit": "1/°C" },
+    "T": { "symbol": "T", "name": "Temperatur", "unit": "°C" }
+  },
+  "description": "Lineær tilnærming for Cu/Al ledere.",
+  "tags": ["temperatur", "leder", "motstand"]
+},
+{
+  "id": "trafo-i2",
+  "title": "Sekundærstrøm fra ytelse (3-fase trafo)",
+  "category": "Elkraft",
+  "section": "Transformatorer",
+  "formula": "I2 = S / (√3 * U2)",
+  "variables": {
+    "I2": { "symbol": "I2", "name": "Sekundærstrøm", "unit": "A" },
+    "S": { "symbol": "S", "name": "Tilsynelatende effekt", "unit": "VA" },
+    "U2": { "symbol": "U2", "name": "Sekundærspenning", "unit": "V" }
+  },
+  "description": "Strøm på sekundærsiden fra S og U2.",
+  "tags": ["transformator", "3-fase", "strøm"]
+},
+{
+  "id": "s-sc",
+  "title": "Kortslutningsytelse (3-fase)",
+  "category": "Elkraft",
+  "section": "Kortslutning/Impedans",
+  "formula": "S_sc = √3 * U * I_k",
+  "variables": {
+    "S_sc": { "symbol": "S_sc", "name": "Kortslutningsytelse", "unit": "VA" },
+    "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+    "I_k": { "symbol": "I_k", "name": "Kortslutningsstrøm", "unit": "A" }
+  },
+  "description": "Tilnærmet 3-fase kortslutningsytelse.",
+  "tags": ["kortslutning", "ytelse", "3-fase"]
+},
+{
+  "id": "z-from-ssc",
+  "title": "Impedans fra kortslutningsytelse",
+  "category": "Elkraft",
+  "section": "Kortslutning/Impedans",
+  "formula": "Z = U^2 / S_sc",
+  "variables": {
+    "Z": { "symbol": "Z", "name": "Impedans", "unit": "Ω" },
+    "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+    "S_sc": { "symbol": "S_sc", "name": "Kortslutningsytelse", "unit": "VA" }
+  },
+  "description": "Forenklet sammenheng mellom Z og S_sc (3-fase).",
+  "tags": ["impedans", "kortslutning"]
+},
+{
+  "id": "pf-correction-kvar",
+  "title": "Kompensasjonsbehov (kvar) for cosφ-korrigering",
+  "category": "Elkraft",
+  "section": "Reaktiv/kompensasjon",
+  "formula": "Q_c = P * (tanφ_1 - tanφ_2)",
+  "variables": {
+    "Q_c": { "symbol": "Q_c", "name": "Nødvendig reaktiv effekt", "unit": "var" },
+    "P": { "symbol": "P", "name": "Aktiv effekt", "unit": "W" },
+    "tanφ_1": { "symbol": "tanφ_1", "name": "Tan før korrigering", "unit": "-" },
+    "tanφ_2": { "symbol": "tanφ_2", "name": "Tan etter korrigering", "unit": "-" }
+  },
+  "description": "Anslått kondensatorbehov for å heve cosφ.",
+  "tags": ["kompensasjon", "reaktiv", "cosφ"]
+},
+{
+  "id": "breaker-derating",
+  "title": "Enkel dimensjonering vern (nedr. faktor)",
+  "category": "Elkraft",
+  "section": "Vern/sikring",
+  "formula": "I_n ≥ I_load / k",
+  "variables": {
+    "I_n": { "symbol": "I_n", "name": "Nominell strøm vern", "unit": "A" },
+    "I_load": { "symbol": "I_load", "name": "Belastningsstrøm", "unit": "A" },
+    "k": { "symbol": "k", "name": "Nedgraderingsfaktor", "unit": "-" }
+  },
+  "description": "Tommelregel – velg vern ≥ belastning justert for k.",
+  "tags": ["vern", "sikring", "dimensjonering"]
+},
+{
+  "id": "apparent-3ph-alt",
+  "title": "Tilsynelatende effekt (3-fase, alternativ symbol)",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "S = √3 * U * I",
+  "variables": {
+    "S": { "symbol": "S", "name": "Tilsynelatende effekt", "unit": "VA" },
+    "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+    "I": { "symbol": "I", "name": "Linjestrøm", "unit": "A" }
+  },
+  "description": "Samme som eksisterende, for konsistente demo-tags.",
+  "tags": ["effekt", "3-fase", "tilsynelatende"]
 }
+
 
 ]
