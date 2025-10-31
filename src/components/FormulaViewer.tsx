@@ -1,9 +1,10 @@
 /* ==== [BLOCK: Imports] BEGIN ==== */
+// Ingen KaTeX her.
 import { VariableTable } from "./VariableTable"
 import type { Formula } from "@/core/types"
 import { solveFor } from "@/core/useCalculator"
 import { useEffect, useMemo, useState } from "react"
-import { SafeMath } from "./SafeMath"
+import { MathText } from "./MathText"
 /* ==== [BLOCK: Imports] END ==== */
 
 type KV = Record<string, number>
@@ -19,7 +20,6 @@ export function FormulaViewer({
 }) {
   const [inputs, setInputs] = useState<KV>({})
   const [target, setTarget] = useState<string>(() => {
-    // default: venstresiden
     const lhs = formula.formula.split("=")[0]?.trim() ?? ""
     return lhs
   })
@@ -65,12 +65,11 @@ export function FormulaViewer({
       </div>
       {/* ==== [BLOCK: Header] END ==== */}
 
-      /* ==== [BLOCK: Formula] BEGIN ==== */
-<div className="px-2">
-  <MathText expr={formula.formula} />
-</div>
-/* ==== [BLOCK: Formula] END ==== */
-
+      {/* ==== [BLOCK: Formula] BEGIN ==== */}
+      <div className="px-2">
+        <MathText expr={formula.formula} />
+      </div>
+      {/* ==== [BLOCK: Formula] END ==== */}
 
       {/* ==== [BLOCK: Variables] BEGIN ==== */}
       <VariableTable f={formula} />
@@ -107,7 +106,7 @@ export function FormulaViewer({
             onChange={e => setTarget(e.target.value)}
           >
             {symbols.map(s => <option key={s} value={s}>{s}</option>)}
-            {/* venstresiden kan være et navn som ikke er i variables (f.eks. P_loss) – vi inkluderer alle */}
+            {/* venstresiden kan være et navn som ikke er i variables – vi inkluderer alle */}
           </select>
 
           <div className="panel p-3">
