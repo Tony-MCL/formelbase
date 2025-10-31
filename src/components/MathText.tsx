@@ -1,9 +1,7 @@
 /* ==== [BLOCK: MathText] BEGIN ==== */
 import React from "react"
 
-/** Minimal, krasj-sikker renderer for formel-strenger.
- *  Vi gjør små kosmetiske bytter (·, sqrt) men ingen KaTeX.
- */
+/** Minimal, krasj-sikker renderer for formel-strenger (uten KaTeX). */
 export function MathText({ expr }: { expr: string }) {
   const pretty = expr
     .replaceAll("*", " · ")
