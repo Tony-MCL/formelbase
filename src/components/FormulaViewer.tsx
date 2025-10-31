@@ -66,10 +66,11 @@ export function FormulaViewer({
       {/* ==== [BLOCK: Header] END ==== */}
 
       /* ==== [BLOCK: Formula] BEGIN ==== */
-      <div className="px-2">
-        <SafeMath math={formula.formula} />
-      </div>
-      /* ==== [BLOCK: Formula] END ==== */
+<div className="px-2">
+  <MathText expr={formula.formula} />
+</div>
+/* ==== [BLOCK: Formula] END ==== */
+
 
       {/* ==== [BLOCK: Variables] BEGIN ==== */}
       <VariableTable f={formula} />
