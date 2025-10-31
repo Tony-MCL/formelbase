@@ -1,33 +1,33 @@
 /* ==== [BLOCK: Imports] BEGIN ==== */
 import React, { useMemo, useState } from "react"
 import { SearchBar } from "./components/SearchBar"
-import { FormulaList } from "./components/FormulaList"
-import { FormulaViewer } from "./components/FormulaViewer"
 import { FavoritesPanel } from "./components/FavoritesPanel"
+import { FormulaViewer } from "./components/FormulaViewer"
 import { FormulaEditor } from "./components/FormulaEditor"
 import { useFormulaStore } from "./core/useFormulaStore"
 import type { Formula } from "./core/types"
 import "./assets/styles.css"
 import { Moon, Sun, Plus } from "lucide-react"
 import { ErrorBoundary } from "./components/ErrorBoundary"
-import { TagFilters } from "./components/TagFilters"
+import { NavTree } from "./components/NavTree"
 /* ==== [BLOCK: Imports] END ==== */
 
 export default function App() {
   /* ==== [BLOCK: State] BEGIN ==== */
   const [q, setQ] = useState("")
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [showEditor, setShowEditor] = useState(false)
   const [dark, setDark] = useState(
     () => window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false
   )
 
   const {
-    all, categories, sections, allTags,
+    all, categories, sections,
     search, toggleFavorite, saveNote, addUserFormula
   } = useFormulaStore()
 
-  const items = useMemo(() => search({ q, tags: selectedTags }), [search, q, selectedTags])
+  // Filtrerte elementer (vises i treet), men ikke åpen full liste
+  const items = useMemo(() => search({ q }), [search, q])
+
   const [current, setCurrent] = useState<Formula | null>(null)
   /* ==== [BLOCK: State] END ==== */
 
@@ -42,12 +42,6 @@ export default function App() {
   /* ==== [BLOCK: Effects/UI] END ==== */
 
   const favorites = useMemo(() => all.filter(f => f.isFavorite), [all])
-
-  function toggleTag(tag: string) {
-    setSelectedTags(prev =>
-      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
-    )
-  }
 
   return (
     <div className="app-shell">
@@ -71,19 +65,22 @@ export default function App() {
 
       {/* ==== [BLOCK: Main] BEGIN ==== */}
       <main className="max-w-6xl mx-auto px-4 py-4 grid md:grid-cols-3 gap-4">
-        {/* Venstre kolonne */}
+        {/* Venstre kolonne: søk + favoritter + NAV-TRE (lukket som standard) */}
         <section className="md:col-span-1 space-y-3">
           <SearchBar onChange={setQ} />
-          <TagFilters tags={allTags} selected={selectedTags} onToggle={toggleTag} />
+
           <FavoritesPanel items={favorites} onSelect={f => setCurrent(f)} />
+
           <div className="text-xs text-slate-500">
             {items.length} treff • {categories.length} kategorier • {sections.length} seksjoner
-            {selectedTags.length ? ` • filter: ${selectedTags.join(", ")}` : ""}
           </div>
-          <FormulaList items={items} onSelect={f => setCurrent(f)} />
+
+          <div className="panel p-3">
+            <NavTree items={items} onSelect={f => setCurrent(f)} />
+          </div>
         </section>
 
-        {/* Høyre kolonne */}
+        {/* Høyre kolonne: visning (uendret) */}
         <section className="md:col-span-2 space-y-3">
           <ErrorBoundary>
             {current ? (
@@ -99,7 +96,7 @@ export default function App() {
                 }}
               />
             ) : (
-              <div className="panel p-6 text-slate-500">Velg en formel fra listen.</div>
+              <div className="panel p-6 text-slate-500">Velg en formel fra treet til venstre.</div>
             )}
           </ErrorBoundary>
 
