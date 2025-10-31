@@ -9,16 +9,21 @@ import { useFormulaStore } from "./core/useFormulaStore"
 import type { Formula } from "./core/types"
 import "./assets/styles.css"
 import { Moon, Sun, Plus } from "lucide-react"
+import { ErrorBoundary } from "./components/ErrorBoundary"
 /* ==== [BLOCK: Imports] END ==== */
 
 export default function App() {
   /* ==== [BLOCK: State] BEGIN ==== */
   const [q, setQ] = useState("")
   const [showEditor, setShowEditor] = useState(false)
-  const [dark, setDark] = useState(() => window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false)
+  const [dark, setDark] = useState(
+    () => window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false
+  )
+
   const {
     all, categories, sections, search, toggleFavorite, saveNote, addUserFormula
   } = useFormulaStore()
+
   const items = useMemo(() => search({ q }), [search, q])
   const [current, setCurrent] = useState<Formula | null>(null)
   /* ==== [BLOCK: State] END ==== */
@@ -27,7 +32,9 @@ export default function App() {
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", dark)
   }, [dark])
+
   React.useEffect(() => {
+    // Velg første treff når listen endres og ingenting er valgt
     if (!current && items.length) setCurrent(items[0]!)
   }, [items.length])
   /* ==== [BLOCK: Effects/UI] END ==== */
@@ -56,6 +63,7 @@ export default function App() {
 
       {/* ==== [BLOCK: Main] BEGIN ==== */}
       <main className="max-w-6xl mx-auto px-4 py-4 grid md:grid-cols-3 gap-4">
+        {/* Venstre kolonne */}
         <section className="md:col-span-1 space-y-3">
           <SearchBar onChange={setQ} />
           <FavoritesPanel items={favorites} onSelect={f => setCurrent(f)} />
@@ -65,29 +73,35 @@ export default function App() {
           <FormulaList items={items} onSelect={f => setCurrent(f)} />
         </section>
 
+        {/* Høyre kolonne */}
         <section className="md:col-span-2 space-y-3">
-          {current ? (
-            <FormulaViewer
-              formula={current}
-              onToggleFavorite={() => {
-                toggleFavorite(current.id)
-                setCurrent({ ...current, isFavorite: !current.isFavorite })
-              }}
-              onSaveNote={(txt) => {
-                saveNote(current.id, txt)
-                setCurrent({ ...current, userNote: txt })
-              }}
-            />
-          ) : (
-            <div className="panel p-6 text-slate-500">Velg en formel fra listen.</div>
-          )}
+          {/* ErrorBoundary sikrer at visningsfeil ikke tar ned hele appen */}
+          <ErrorBoundary>
+            {current ? (
+              <FormulaViewer
+                formula={current}
+                onToggleFavorite={() => {
+                  toggleFavorite(current.id)
+                  setCurrent({ ...current, isFavorite: !current.isFavorite })
+                }}
+                onSaveNote={(txt) => {
+                  saveNote(current.id, txt)
+                  setCurrent({ ...current, userNote: txt })
+                }}
+              />
+            ) : (
+              <div className="panel p-6 text-slate-500">Velg en formel fra listen.</div>
+            )}
+          </ErrorBoundary>
 
           {showEditor && (
-            <FormulaEditor onSave={async (f) => {
-              await addUserFormula(f)
-              setShowEditor(false)
-              setCurrent(f)
-            }}/>
+            <FormulaEditor
+              onSave={async (f) => {
+                await addUserFormula(f)
+                setShowEditor(false)
+                setCurrent(f)
+              }}
+            />
           )}
         </section>
       </main>
