@@ -50,3 +50,14 @@ html, body, #root { height: 100%; }
   @apply w-full text-left text-sm px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-800;
 }
 /* ==== [BLOCK: NavTree Styles] END ==== */
+/* ==== [BLOCK: NavTree Indent Styles] BEGIN ==== */
+.nav-leaf-wrap {
+  /* subtil venstrekant for å skille formler fra grupper (valgfritt men pent) */
+  @apply border-l border-slate-200 dark:border-slate-800;
+}
+
+.nav-item.nav-leaf {
+  /* litt mindre tekst og ekstra venstre padding for “formel-nivået” */
+  @apply text-[0.9rem] pl-2;
+}
+/* ==== [BLOCK: NavTree Indent Styles] END ==== */
