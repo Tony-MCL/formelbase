@@ -10,21 +10,24 @@ import type { Formula } from "./core/types"
 import "./assets/styles.css"
 import { Moon, Sun, Plus } from "lucide-react"
 import { ErrorBoundary } from "./components/ErrorBoundary"
+import { TagFilters } from "./components/TagFilters"
 /* ==== [BLOCK: Imports] END ==== */
 
 export default function App() {
   /* ==== [BLOCK: State] BEGIN ==== */
   const [q, setQ] = useState("")
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [showEditor, setShowEditor] = useState(false)
   const [dark, setDark] = useState(
     () => window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false
   )
 
   const {
-    all, categories, sections, search, toggleFavorite, saveNote, addUserFormula
+    all, categories, sections, allTags,
+    search, toggleFavorite, saveNote, addUserFormula
   } = useFormulaStore()
 
-  const items = useMemo(() => search({ q }), [search, q])
+  const items = useMemo(() => search({ q, tags: selectedTags }), [search, q, selectedTags])
   const [current, setCurrent] = useState<Formula | null>(null)
   /* ==== [BLOCK: State] END ==== */
 
@@ -34,12 +37,17 @@ export default function App() {
   }, [dark])
 
   React.useEffect(() => {
-    // Velg første treff når listen endres og ingenting er valgt
     if (!current && items.length) setCurrent(items[0]!)
   }, [items.length])
   /* ==== [BLOCK: Effects/UI] END ==== */
 
   const favorites = useMemo(() => all.filter(f => f.isFavorite), [all])
+
+  function toggleTag(tag: string) {
+    setSelectedTags(prev =>
+      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+    )
+  }
 
   return (
     <div className="app-shell">
@@ -66,16 +74,17 @@ export default function App() {
         {/* Venstre kolonne */}
         <section className="md:col-span-1 space-y-3">
           <SearchBar onChange={setQ} />
+          <TagFilters tags={allTags} selected={selectedTags} onToggle={toggleTag} />
           <FavoritesPanel items={favorites} onSelect={f => setCurrent(f)} />
           <div className="text-xs text-slate-500">
             {items.length} treff • {categories.length} kategorier • {sections.length} seksjoner
+            {selectedTags.length ? ` • filter: ${selectedTags.join(", ")}` : ""}
           </div>
           <FormulaList items={items} onSelect={f => setCurrent(f)} />
         </section>
 
         {/* Høyre kolonne */}
         <section className="md:col-span-2 space-y-3">
-          {/* ErrorBoundary sikrer at visningsfeil ikke tar ned hele appen */}
           <ErrorBoundary>
             {current ? (
               <FormulaViewer
