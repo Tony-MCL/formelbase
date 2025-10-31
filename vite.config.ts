@@ -19,10 +19,6 @@ export default defineConfig({
         theme_color: "#0b1220",
         background_color: "#0b1220",
         display: "standalone",
-        icons: [
-          { src: "icons/icon-192.png", sizes: "192x192", type: "image/png" },
-          { src: "icons/icon-512.png", sizes: "512x512", type: "image/png" }
-        ]
       },
       // Unngå "glob pattern doesn't match" og sørg for at html/js/css/png/svg tas med
       workbox: {
