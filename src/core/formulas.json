@@ -71,5 +71,162 @@
     },
     "description": "Varmeutvikling i leder pga. strøm.",
     "tags": ["tap", "varme"]
-  }
+  },
+{
+  "id": "apparent-power-1ph",
+  "title": "Tilsynelatende effekt (1-fase)",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "S = U * I",
+  "variables": {
+    "S": { "symbol": "S", "name": "Tilsynelatende effekt", "unit": "VA" },
+    "U": { "symbol": "U", "name": "Spenning", "unit": "V" },
+    "I": { "symbol": "I", "name": "Strøm", "unit": "A" }
+  },
+  "description": "Produktet av spenning og strøm i 1-fase vekselstrømskrets.",
+  "tags": ["effekt", "tilsynelatende", "1-fase"]
+},
+{
+  "id": "apparent-power-3ph",
+  "title": "Tilsynelatende effekt (3-fase)",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "S = √3 * U * I",
+  "variables": {
+    "S": { "symbol": "S", "name": "Tilsynelatende effekt", "unit": "VA" },
+    "U": { "symbol": "U", "name": "Linjesspenning", "unit": "V" },
+    "I": { "symbol": "I", "name": "Linjestrøm", "unit": "A" }
+  },
+  "description": "Tilsynelatende effekt i 3-fase system.",
+  "tags": ["effekt", "3-fase", "tilsynelatende"]
+},
+{
+  "id": "reactive-power-1ph",
+  "title": "Reaktiv effekt (1-fase)",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "Q = U * I * sinφ",
+  "variables": {
+    "Q": { "symbol": "Q", "name": "Reaktiv effekt", "unit": "var" },
+    "U": { "symbol": "U", "name": "Spenning", "unit": "V" },
+    "I": { "symbol": "I", "name": "Strøm", "unit": "A" },
+    "sinφ": { "symbol": "sinφ", "name": "Sinus til fasevinkel", "unit": "-" }
+  },
+  "description": "Den delen av effekten som ikke utfører arbeid, men svinger frem og tilbake i systemet.",
+  "tags": ["reaktiv", "effekt", "ac"]
+},
+{
+  "id": "power-factor",
+  "title": "Effektfaktor",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "cosφ = P / S",
+  "variables": {
+    "cosφ": { "symbol": "cosφ", "name": "Effektfaktor", "unit": "-" },
+    "P": { "symbol": "P", "name": "Aktiv effekt", "unit": "W" },
+    "S": { "symbol": "S", "name": "Tilsynelatende effekt", "unit": "VA" }
+  },
+  "description": "Forholdet mellom aktiv og tilsynelatende effekt.",
+  "tags": ["effektfaktor", "cosφ"]
+},
+{
+  "id": "efficiency",
+  "title": "Virkningsgrad",
+  "category": "Elkraft",
+  "section": "Effekt",
+  "formula": "η = P_out / P_in",
+  "variables": {
+    "η": { "symbol": "η", "name": "Virkningsgrad", "unit": "-" },
+    "P_out": { "symbol": "P_out", "name": "Avgitt effekt", "unit": "W" },
+    "P_in": { "symbol": "P_in", "name": "Tilført effekt", "unit": "W" }
+  },
+  "description": "Angir hvor stor andel av tilført effekt som omsettes til nyttig arbeid.",
+  "tags": ["virkningsgrad", "effekt"]
+},
+{
+  "id": "resistivity",
+  "title": "Resistivitet",
+  "category": "Elkraft",
+  "section": "Grunnleggende",
+  "formula": "ρ = R * A / L",
+  "variables": {
+    "ρ": { "symbol": "ρ", "name": "Resistivitet", "unit": "Ω·m" },
+    "R": { "symbol": "R", "name": "Motstand", "unit": "Ω" },
+    "A": { "symbol": "A", "name": "Tverrsnitt", "unit": "m²" },
+    "L": { "symbol": "L", "name": "Lengde", "unit": "m" }
+  },
+  "description": "Materialspesifikk motstandsverdi.",
+  "tags": ["resistivitet", "material"]
+},
+{
+  "id": "conductivity",
+  "title": "Ledningsevne",
+  "category": "Elkraft",
+  "section": "Grunnleggende",
+  "formula": "σ = 1 / ρ",
+  "variables": {
+    "σ": { "symbol": "σ", "name": "Ledningsevne", "unit": "S/m" },
+    "ρ": { "symbol": "ρ", "name": "Resistivitet", "unit": "Ω·m" }
+  },
+  "description": "Omvendt av resistivitet, uttrykker hvor lett elektrisitet ledes i materialet.",
+  "tags": ["ledningsevne"]
+},
+{
+  "id": "transformer-voltage-ratio",
+  "title": "Spenningsforhold i transformator",
+  "category": "Elkraft",
+  "section": "Transformatorer",
+  "formula": "U1 / U2 = N1 / N2",
+  "variables": {
+    "U1": { "symbol": "U1", "name": "Primærspenning", "unit": "V" },
+    "U2": { "symbol": "U2", "name": "Sekundærspenning", "unit": "V" },
+    "N1": { "symbol": "N1", "name": "Viklinger primær", "unit": "-" },
+    "N2": { "symbol": "N2", "name": "Viklinger sekundær", "unit": "-" }
+  },
+  "description": "Forholdet mellom viklingstall og spenning i transformator.",
+  "tags": ["transformator", "spenning"]
+},
+{
+  "id": "transformer-current-ratio",
+  "title": "Strømforhold i transformator",
+  "category": "Elkraft",
+  "section": "Transformatorer",
+  "formula": "I1 / I2 = N2 / N1",
+  "variables": {
+    "I1": { "symbol": "I1", "name": "Primærstrøm", "unit": "A" },
+    "I2": { "symbol": "I2", "name": "Sekundærstrøm", "unit": "A" },
+    "N1": { "symbol": "N1", "name": "Viklinger primær", "unit": "-" },
+    "N2": { "symbol": "N2", "name": "Viklinger sekundær", "unit": "-" }
+  },
+  "description": "Strømforholdet mellom transformatorens viklinger (ideell).",
+  "tags": ["transformator", "strøm"]
+},
+{
+  "id": "transformer-balance",
+  "title": "Effektbalanse i transformator",
+  "category": "Elkraft",
+  "section": "Transformatorer",
+  "formula": "S1 = S2",
+  "variables": {
+    "S1": { "symbol": "S1", "name": "Inngangseffekt", "unit": "VA" },
+    "S2": { "symbol": "S2", "name": "Utgangseffekt", "unit": "VA" }
+  },
+  "description": "I en ideell transformator er inn- og ut-effekt like store.",
+  "tags": ["transformator", "effekt"]
+},
+{
+  "id": "voltage-drop",
+  "title": "Spenningsfall i leder",
+  "category": "Elkraft",
+  "section": "Ledninger",
+  "formula": "ΔU = I * R",
+  "variables": {
+    "ΔU": { "symbol": "ΔU", "name": "Spenningsfall", "unit": "V" },
+    "I": { "symbol": "I", "name": "Strøm", "unit": "A" },
+    "R": { "symbol": "R", "name": "Motstand", "unit": "Ω" }
+  },
+  "description": "Spenningsfall i leder som følge av resistans.",
+  "tags": ["leder", "spenningsfall"]
+}
+
 ]
